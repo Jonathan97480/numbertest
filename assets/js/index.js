@@ -1,7 +1,8 @@
 
 /* user varaible default value */
-let user=new Object
-let mynumber=0
+let user=new Object;
+let mynumber=0;
+let chance=3;
 
 /* {
     name: "",
@@ -46,7 +47,7 @@ function StartGame() {
 function game() {
     let html="";
 
-    html+=back('back', GameDraw("gameForm"))
+    html+=back('back', GameDraw())
 
     document.getElementById("main").innerHTML=html;
 

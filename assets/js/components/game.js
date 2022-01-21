@@ -1,8 +1,8 @@
-function GameDraw(classCss) {
+function GameDraw() {
 
-    let html=`<div class="${classCss}" id="f1">
+    let html=`<div class="gameForm" id="f1">
 
-           <h1 class="defaultNotif" id="notif">MOIN</h1>
+           <h1 class="" id="notif"></h1>
            
            <form >
                 <label>Choiser un nombre</label>
@@ -16,8 +16,12 @@ function GameDraw(classCss) {
 }
 
 function submitNumber() {
+
     let form=getForm()
+
     form.addEventListener('submit', (event) => {
+
+        let h=document.querySelector('h1');
 
         event.preventDefault()
 
@@ -26,16 +30,19 @@ function submitNumber() {
 
             if (item.value>getRandomNumber()) {
 
-                /* Affihcer un message pour dire que ces moin */
-                /* deconter le nombre déssais a jouter le nombre derreur  */
-
+                h.innerHTML="MOIN"
+                ClearH(h)
+                SubstracChance()
+                addError()
+                form.elements.item(index).value=""
                 return
 
             } else if (item.value<getRandomNumber()) {
-
-                /* Affihcer un message pour dire que ces plus */
-                /* deconter le nombre déssais a jouter le nombre derreur  */
-
+                h.innerHTML="PLUS"
+                ClearH(h)
+                SubstracChance()
+                addError()
+                form.elements.item(index).value=""
                 return
             }
 
@@ -48,24 +55,49 @@ function submitNumber() {
     })
 }
 
-function SubstracChance() {
-    /* retirait 1 ho nombre dessais disponible */
+function ClearH(h) {
+    setTimeout(() => { h.innerHTML="" }, 2000);
+}
 
-    /* si le jouer na plus déssais lui proposer une pube */
-    /* si oui afficher une madal avec une video  */
+function SubstracChance() {
+
+    chance--;
+
+    if (chance<=0) {
+
+        confirm(
+            "Vouslez vous regarder une pube pour  récuperait 3 essai"
+        )? document.querySelector('main').innerHTML+=Pub():looseGame();
+    }
 }
 function addError() {
-    /* Ajouter plus 1 au erreure quil a efectuer */
+    user.errorCunt++;
 }
 
 
 function Pub() {
-    /* choisire une pub dans un tableau de video */
-    /* afficher la pub en modal */
+    let listMedai=[
+        "https://www.youtube.com/embed/5GS_AAxZeFc",
+        "https://www.youtube.com/watch?v=qetW6R9Jxs4"
+    ]
+    /* TODO: rajouter une selection des pub en Random */
+    let html=`
+        <div class=video>
+            <span id=btnBlock" ><span>
+         <iframe width="560" height="315" src="${listMedai[0]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+
+        </div>
+    `
+    return modalDraw(html);
 }
 
-function modalDraw(ClassCss, content) {
-    /* definire la modal et son contenue */
+function modalDraw(content) {
+
+    let html=`<div class="modal" >
+        <span class="modalContent" >${content}<span>
+    </div>`
+
+    return html;
 }
 
 function timerDeconte(time) {
@@ -86,4 +118,8 @@ function setRandomNumber(limit) {
 }
 function getRandomNumber() {
     return mynumber;
+}
+
+function looseGame() {
+
 }
