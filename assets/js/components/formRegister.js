@@ -130,10 +130,10 @@ function submit(event, form) {
     user.avatar=defaultAvatar[Math.floor(Math.random()*defaultAvatar.length)];
     user.errorCunt=0;
     user.gain=0;
-    console.log(user)
-    mynumber=setRandomNumber(user.dif)
-    removeSubmit(form)
-    game();
+    console.log(user);
+    mynumber=setRandomNumber(user.dif);
+    removeSubmit(form);
+    SelectAvatarDraw();
 }
 
 /**

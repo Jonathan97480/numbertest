@@ -322,6 +322,7 @@ function ClassmentUser() {
     
     </div>
     <div  class="btnctrl" id="clsBtn">
+    <img src="assets/img/Right.png"  />
     </div>
     `
     return html;
@@ -354,9 +355,36 @@ function eventClassment() {
 }
 
 /* CHOICE AVATAR  */
+function getAvatar(urlAvatar) {
+
+    user.avatar=urlAvatar;
+    game()
+
+}
 
 function SelectAvatarDraw() {
 
+    let main=document.querySelector('main');
 
+    main.innerHTML="<h1>Sélectionner un avatar</h1>";
+
+    let div=document.createElement('div');
+
+    div.className="list-avatar";
+
+    defaultAvatar.map((avatar) => {
+        console.log(avatar)
+        let img=document.createElement('img');
+        img.setAttribute('src', avatar);
+        img.setAttribute('onclick', `getAvatar('${avatar}')`);
+        div.appendChild(img);
+
+
+    })
+
+    main.appendChild(div);
 
 }
+
+
+

@@ -295,6 +295,16 @@ h1 {
     z-index: 3;
 }
 
+.btnctrl img {
+    width: 50px;
+    transition-duration: 1s;
+
+}
+
+.btnctrl img:hover {
+    transform: rotate(180deg);
+
+}
 
 .activeClassment {
     right: 0px;
@@ -304,7 +314,19 @@ h1 {
 
 .activeBtnClassment {
     right: 300px;
-    transition-duration: 1.3s;
+    transition-duration: 0.5s;
+
+}
+
+.activeBtnClassment img {
+
+    transform: rotate(180deg);
+    transition-duration: 0.5s;
+
+}
+
+.activeBtnClassment img:hover {
+    transform: rotate(0deg);
 
 }
 
@@ -318,6 +340,23 @@ h1 {
 
 .avatar {
     border-radius: 50%;
+
+}
+
+.profil-block {
+    width: 96px;
+    height: 98px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+
+
+header .avatar:hover {
+
+
+    width: 100px;
+
 }
 
 .profil {
@@ -349,4 +388,41 @@ h1 {
 
 .profil button {
     margin-top: 10px;
+}
+
+.list-avatar {
+    min-width: 300px;
+    max-width: 572px;
+    display: flex;
+    background-color: white;
+    flex-wrap: wrap;
+    border-radius: 15px;
+    padding: 5px;
+    margin-top: 15%;
+}
+
+.list-avatar img {
+
+    border-radius: 50%;
+}
+
+
+
+
+/* Responsive */
+
+@media screen and (max-width: 815px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header #chance, header #error {
+        width: 100vw;
+        text-align: left;
+    }
+
+    .gameForm {
+        text-align: center;
+    }
 }
