@@ -1,14 +1,44 @@
+/* Inport fonts */
+@font-face {
+    font-family: RabentoBlack;
+    src: url(../fonts/RabentoBlack.otf);
+}
+
+@font-face {
+    font-family: Heavitas;
+    src: url(../fonts/Heavitas.ttf);
+}
+
+/*
+Rezet Css min 
+ */
 * {
     margin: 0;
     padding: 0;
     position: relative;
+    font-family: Heavitas;
 }
+
 
 html, body {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
+}
 
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
 
+header span {
+    color: white;
+    font-weight: bold;
+    font-size: 18pt;
+    margin: 0 15px;
 
 }
 
@@ -53,7 +83,6 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-
     align-items: center;
 
 }
@@ -61,14 +90,26 @@ h1 {
 .registerForm span {
     display: flex;
     flex-direction: column;
+    width: 280px;
+    height: 50px;
 
-    width: 60%;
-    height: 17%;
+}
+
+.error {
+    display: block !important;
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 1px 1px 1px black;
+    width: 100% !important;
+    text-align: center;
+    height: auto !important;
 
 }
 
 .registerForm span input {
     height: 100%;
+    width: 100%;
     border-radius: 10px;
 }
 
@@ -138,6 +179,9 @@ h1 {
     height: 100px;
     border-radius: 5px;
     margin-top: 10px;
+    font-size: 50pt;
+    text-align: center;
+    color: #57beea
 }
 
 .modal {
@@ -150,4 +194,159 @@ h1 {
     justify-content: center;
     background-color: rgba(70, 68, 68, 0.6);
     top: 0;
+}
+
+
+.video #btnBlock {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 100;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+.looseBox {
+    width: 600px;
+    height: 300px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+
+}
+
+.Bheader {
+
+    font-weight: bold;
+    font-size: 30pt;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.Bbody {
+    width: 90%;
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Bbody button {
+    padding: 10px 15px;
+    border-radius: 15px;
+
+}
+
+.Bbody #btn1 {
+    background-color: blue;
+    color: white;
+}
+
+.Bbody #btn2 {
+    background-color: red;
+    color: white;
+}
+
+.classment {
+    position: absolute;
+    height: 100vh;
+    width: 300px;
+    right: -400px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    transition-duration: 0.8s;
+    z-index: 10;
+
+}
+
+.classment span {
+    width: 300px;
+    height: 100px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 5px;
+    margin: 2px 0;
+    border-radius: 5px;
+
+}
+
+.classment span img {
+    width: 50px;
+    border-radius: 50%;
+
+}
+
+.btnctrl {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 0px;
+    top: 15px;
+    border-radius: 15px 0 0 15px;
+    background-color: white;
+    transition-duration: 0.2s;
+    z-index: 3;
+}
+
+
+.activeClassment {
+    right: 0px;
+    transition-duration: 0.5s;
+
+}
+
+.activeBtnClassment {
+    right: 300px;
+    transition-duration: 1.3s;
+
+}
+
+.moin {
+    color: #ff3895;
+}
+
+.plus {
+    color: #a8dcd3;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.profil {
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.profil img {
+    position: absolute;
+    top: -40px;
+}
+
+.profil h2, .profil p {
+    margin-top: 60px;
+    font-size: 18pt;
+    margin-bottom: 5px;
+}
+
+.profil p {
+    margin-top: 0;
+}
+
+.profil button {
+    margin-top: 10px;
 }

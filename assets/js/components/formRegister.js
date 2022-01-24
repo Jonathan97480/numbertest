@@ -1,7 +1,7 @@
 
 
 /**
- * 
+ * define structure form register user 
  * @param {string} classCss name class 
  * @returns {String} Html element
  */
@@ -20,16 +20,16 @@ function formRegister(classCss) {
             </span>
             <span class="selectDif">
                 <span>
-                    <input type="radio"  name="dif" value="30" checked/>
-                    <label for="">Facile (0->30)</label>
+                    <input type="radio" id="v30" onclick="boxRadioCheked('v30')"  name="dif" value="30" checked/>
+                    <label for="v30">Facile (0->30)</label>
                 </span>
                 <span>
-                    <input type="radio"  name="dif" value="100"/>
-                    <label for="">Normal (0->100)</label>
+                    <input type="radio" id="v100"  onclick="boxRadioCheked('v100')"  name="dif" value="100"/>
+                    <label for="v100">Normal (0->100)</label>
                 </span>
                 <span>
-                    <input type="radio"  name="dif" value="200"/>
-                    <label for="">Dificile (0->200)</label>
+                    <input type="radio" id="v200"  onclick="boxRadioCheked('v200')" name="dif" value="200"/>
+                    <label for="v200">Dificile (0->200)</label>
                 </span>
 
             </span>
@@ -51,6 +51,10 @@ function getForm() {
     return form
 }
 
+/**
+ * add event submit to form
+ * @returns {void}
+ */
 function submitForm() {
     const myForm=getForm()
     myForm.addEventListener('submit', (e) => { submit(e, myForm) })
@@ -58,7 +62,11 @@ function submitForm() {
 
 }
 
-
+/**
+ *  check the age of the user
+ * @param {string|number} age 
+ * @returns 
+ */
 function checkAge(age) {
 
     if (age.length==4) {
@@ -81,6 +89,13 @@ function checkAge(age) {
 
 }
 
+
+/**
+ *  manage data submit for user by the form
+ * @param {Event} event 
+ * @param {HTMLFormElement} form 
+ * @returns {void}
+ */
 function submit(event, form) {
 
     event.preventDefault()
@@ -100,7 +115,15 @@ function submit(event, form) {
 
         }
 
-        obj[item.name]=item.value;
+        if (item.name=="dif"&&item.checked==true) {
+            obj[item.name]=item.value;
+        } else if (item.name!="dif") {
+            obj[item.name]=item.value;
+
+        }
+
+
+
     }
     user=obj
 
@@ -113,6 +136,41 @@ function submit(event, form) {
     game();
 }
 
+/**
+ *  remove event submit atached frorm register user 
+ * @param {HTMLFormElement} form 
+ */
 function removeSubmit(form) {
-    /*   form.removeEventListener('submit', (e) => submit(e, form), false) */
+    form.removeEventListener('submit', (e) => submit(e, form), false)
+}
+
+/**
+ * define status box radio 
+ * @param {string} id box radio selected 
+ */
+function boxRadioCheked(id) {
+
+
+
+    switch (id) {
+        case 'v30':
+            document.querySelector('#'+id).checked=true;
+            document.querySelector('#v100').checked=false;
+            document.querySelector('#v200').checked=false;
+            break;
+
+        case 'v100':
+            document.querySelector('#'+id).checked=true;
+            document.querySelector('#v30').checked=false;
+            document.querySelector('#v200').checked=false;
+            break;
+
+        default:
+            document.querySelector('#'+id).checked=true;
+            document.querySelector('#v100').checked=false;
+            document.querySelector('#v30').checked=false;
+            break;
+    }
+
+
 }
