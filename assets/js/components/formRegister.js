@@ -15,7 +15,7 @@ function formRegister(classCss) {
                  <input type="text" id="name" name="name" required />
             </span>
             <span class="userBlock">
-                 <label for="age">Votre age</label>
+                 <label for="age">Votre année de naissance</label>
                  <input type="number" id="age" name="age" maxlength = "4" required/>
             </span>
             <span class="selectDif">

@@ -3,6 +3,18 @@ let pubStatus={
     time: 0
 };
 
+let startGain=500
+
+
+
+function initGame() {
+    startGain=500;
+    chance=3;
+    user.gain=0;
+    user.errorCunt=0;
+}
+
+
 /**
  * define structure form the game
  * @returns {string} return html code 
@@ -43,7 +55,7 @@ function submitNumber() {
             if (item.value>getRandomNumber()) {
 
                 h.setAttribute('class', 'moin')
-                h.innerHTML="MOIN"
+                h.innerHTML="MOINS"
 
                 ClearH(h)
                 SubstracChance()
@@ -62,10 +74,12 @@ function submitNumber() {
             }
 
             /* Le jouer a Ganier */
+            user.gain=startGain;
             document.querySelector('main').innerHTML+=modalDraw(ContentEndGame("BIEN JOUER", "RECOMMENCER", "RETOURNER A L'ACCEUIL"));
             AddEventContentGame();
-            /* sauvgarder sont resulta dans la base de donée */
-            /* Afficher les classement */
+            /* save player to database api */
+            setDatatoApi('http://www.portfolio.jon-dev.fr/Api/', 'registrePlayer', user);
+
 
         }
     })
@@ -89,12 +103,15 @@ function SubstracChance() {
 
     chance--;
     document.getElementById('chance').innerHTML=`Nombre d'essai : ${chance}`
-
+    startGain-=30;
     if (chance<=0) {
 
         confirm(
-            "Vouslez vous regarder une pube pour  récuperait 3 essai"
+            "Voulez vous regarder une pub pour  récupérait 3 essais"
         )? document.querySelector('main').innerHTML+=Pub():looseGame();
+    } else if (startGain<=0) {
+        startGain=0;
+        looseGame();
     }
 }
 
@@ -105,7 +122,9 @@ function SubstracChance() {
  */
 function addError() {
     user.errorCunt++;
-    document.getElementById('error').innerHTML=`Nombre erreure : ${user.errorCunt}`
+    document.getElementById('error').innerHTML=`Nombre d'erreures : ${user.errorCunt}`;
+    document.getElementById('start-gain').innerHTML=`Jeton de départ : ${startGain}`
+
 
 }
 
@@ -121,7 +140,9 @@ function Pub() {
 
     const listMedai=[
         "https://www.youtube.com/embed/ubDF5aLEld0",
-        "https://www.youtube.com/embed/KszZ_i0mOdg"
+        "https://www.youtube.com/embed/KszZ_i0mOdg",
+        "https://www.youtube.com/embed/AQXVHITd1N4",
+        "https://www.youtube.com/embed/ubDF5aLEld0"
     ]
     const curentPub=listMedai[Math.floor(Math.random()*listMedai.length)];
 
@@ -294,44 +315,49 @@ function AddEventContentGame() {
 
 /**
  * return card list classment all player
- * @returns {string} code html
+ * @returns {Promise} 
  */
-function ClassmentUser() {
+async function ClassmentUser() {
 
-    const html=`
-    <div id="cls" class="classment">
-    
-        <span>
-            <img src="assets/img/avatar4.png" / >
-            <h3>Anna</h3>
-            <p>100</p>
-        </span>
-        
-        <span>
-            <img src="assets/img/avatar6.png" / >
-            <h3>Alhan</h3>
-            <p>100</p>
-        </span>
-        
-        <span>
-            <img src="assets/img/avatar1.png" / >
-            <h3>Athena</h3>
-            <p>100</p>
-        </span>
-    
-    
-    </div>
-    <div  class="btnctrl" id="clsBtn">
-    <img src="assets/img/Right.png"  />
-    </div>
-    `
+
+    /* Get data to api */
+
+    let html=""
+
+    await getDatatoApi('http://www.portfolio.jon-dev.fr/Api/', 'getAllPlayer').then((result) => {
+
+        const data=result.results;
+
+        html+=`<div id="cls" class="classment">`;
+
+        data.map((player) => {
+
+            player.dif==parseInt(user.dif)?
+
+                html+=`<span>
+                <img src="assets/img/${player.avatar}" / >
+                <h3>${player.name}</h3>
+                <p>${player.score}</p>
+             </span>`:"";
+
+
+        })
+
+        html+=`</div>
+            <div class="btnctrl" id="clsBtn">
+                <img src="assets/img/Right.png" />
+            </div>`;
+
+    })
     return html;
+
 }
 
 /**
  * Add event list all user 
  */
 function eventClassment() {
+
 
 
     document.getElementById('clsBtn').addEventListener('click', () => {
@@ -375,7 +401,7 @@ function SelectAvatarDraw() {
     defaultAvatar.map((avatar) => {
         console.log(avatar)
         let img=document.createElement('img');
-        img.setAttribute('src', avatar);
+        img.setAttribute('src', `assets/img/${avatar}`);
         img.setAttribute('onclick', `getAvatar('${avatar}')`);
         div.appendChild(img);
 

@@ -261,6 +261,7 @@ h1 {
     justify-content: start;
     transition-duration: 0.8s;
     z-index: 10;
+    overflow-y: auto;
 
 }
 
@@ -406,8 +407,21 @@ header .avatar:hover {
     border-radius: 50%;
 }
 
+.select-btn-a {
 
+    height: 60px !important;
 
+}
+
+.select-btn-a a {
+    text-decoration: none;
+    color: black;
+}
+
+.select-active {
+    text-decoration: underline !important;
+    transition-duration: 1s;
+}
 
 /* Responsive */
 
@@ -415,14 +429,26 @@ header .avatar:hover {
     header {
         flex-direction: column;
         align-items: center;
+        justify-content: space-between;
+        height: 250px;
     }
 
-    header #chance, header #error {
+    header #chance, header #error, header #start-gain {
         width: 100vw;
         text-align: left;
     }
 
     .gameForm {
+        text-align: center;
+    }
+
+    .back {
+        background-color: rgba(0, 0, 0, 0);
+        height: 30%;
+    }
+
+    h1 {
+        font-size: 35pt;
         text-align: center;
     }
 }
